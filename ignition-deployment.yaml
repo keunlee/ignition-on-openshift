@@ -27,6 +27,12 @@ spec:
         - name: IGNITION_EDITION
           value: "maker"
         - name: IGNITION_LICENSE_KEY
-          value: "REPLACE"
+          valueFrom:
+            secretKeyRef:
+              name: ignition-secrets
+              key: IGNITION_LICENSE_KEY
         - name: IGNITION_ACTIVATION_TOKEN
-          value: "REPLACE"
+          valueFrom:
+            secretKeyRef:
+              name: ignition-secrets
+              key: IGNITION_ACTIVATION_TOKEN
