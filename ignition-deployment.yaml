@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ignition
+spec:
+  selector:
+    matchLabels:
+      name: ignition
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: ignition
+    spec:
+      serviceAccountName: ignition-sa
+      containers:
+      - resources: {}
+        name: ignition
+        imagePullPolicy: Always
+        image: quay.io/kelee/ignition-maker-ubi:8.1.10
+        ports:
+        - name: ignition-port
+          containerPort: 8088
+        env:
+        - name: GATEWAY_ADMIN_PASSWORD
+          value: "password"
+        - name: IGNITION_EDITION
+          value: "maker"
+        - name: IGNITION_LICENSE_KEY
+          value: "REPLACE"
+        - name: IGNITION_ACTIVATION_TOKEN
+          value: "REPLACE"
